@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 
 const AuthRoute = require('./src/routes/auth')
+const BookingRoute = require('./src/routes/booking')
 
 async function connectToDB() {
   try {
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth', AuthRoute)
+app.use('/api/booking', BookingRoute)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
