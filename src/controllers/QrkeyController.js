@@ -57,9 +57,10 @@ class QrkeyController {
 
     readQR (req, res, next) {
 
-        function messageRes(status) {
+        function messageRes(status, message) {
             res.json({
-                isSuccess: status
+                isSuccess: status,
+                message: message
             })
         }
 
@@ -71,22 +72,26 @@ class QrkeyController {
         try {
             jsonData = JSON.parse(decodedString);
         } catch (e) {
-            return messageRes(false)
+            return messageRes(false, 'Ещё раз, пожалуйста')
         }
 
         if ((jsonData.room_number) && (req.body.room_number == jsonData.room_number)) {
             Booking.findById( jsonData.idBooking )
                 .then(Booking => {
                     if (Booking) {
-                        return messageRes(true)
+                        User.findById(Booking.idUser)
+                            .then(user => {
+                                const message = 'Здравствуйте, ' + user.fullname
+                                return messageRes(true, message)
+                            })
                     }
-                    else return messageRes(false)
+                    else return messageRes(false, 'Ещё раз, пожалуйста')
                 })
                 .catch(error => {
-                    return messageRes(false)
+                    return messageRes(false, 'Ещё раз, пожалуйста')
                 })
         }
-        else return messageRes(false)
+        else return messageRes(false, 'Ещё раз, пожалуйста')
     }
 }
 

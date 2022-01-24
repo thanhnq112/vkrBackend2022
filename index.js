@@ -38,5 +38,5 @@ app.use('/api/booking', BookingRoute)
 app.use('/api/qrcode', QrkeyRoute)
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Server is opening at http://localhost:${port}`)
 })

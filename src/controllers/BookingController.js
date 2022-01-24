@@ -1,7 +1,5 @@
 const User = require('../models/User')
 const Booking = require('../models/Booking')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
 
 class BookingController {
 
