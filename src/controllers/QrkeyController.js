@@ -55,6 +55,7 @@ class QrkeyController {
 
     }
 
+    // /api/qrcode/readQR [POST]
     readQR (req, res, next) {
 
         function messageRes(status, message) {
@@ -72,9 +73,9 @@ class QrkeyController {
         try {
             jsonData = JSON.parse(decodedString);
         } catch (e) {
-            return messageRes(false, 'Ещё раз, пожалуйста')
+            return messageRes(false, 'Ещё раз, пожалуйста, failed QR code')
         }
-
+        console.log(jsonData);
         if ((jsonData.room_number) && (req.body.room_number == jsonData.room_number)) {
             Booking.findById( jsonData.idBooking )
                 .then(Booking => {

@@ -21,6 +21,7 @@ class AuthController {
                 phone: req.body.phone,
                 password: hashedPass
             })
+            
             user.save()
                 .then(user => {
                     res.json({
@@ -54,6 +55,7 @@ class AuthController {
                                 error: err
                             })
                         }
+                        // res.send(password)
 
                         if (result) {
                             token = jwt.sign({username: username}, 'secretValue', {expiresIn: '1h'})
